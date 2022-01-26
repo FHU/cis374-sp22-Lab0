@@ -141,81 +141,81 @@ namespace UnitTestProject1
             }
         }
 
-        //[TestMethod]
-        //public void ParentInt2()
-        //{
-        //    BinarySearchTree<int> tree = new BinarySearchTree<int>();
-        //    tree.Add(8, 9);
-        //    tree.Add(10, 11);
-        //    tree.Add(6, 7);
-        //    tree.Add(5, 6);
-        //    tree.Add(22, 23);
-        //    tree.Add(26, 27);
-        //    tree.Add(7, 8);
-        //    tree.Add(23, 24);
-        //    Assert.AreEqual(tree.Search(8).Value, tree.Parent(tree.Search(10)).Value);
-        //    Assert.AreEqual(tree.Search(8).Value, tree.Parent(tree.Search(6)).Value);
-        //    Assert.AreEqual(tree.Search(6).Value, tree.Parent(tree.Search(5)).Value);
-        //    Assert.AreEqual(tree.Search(10).Value, tree.Parent(tree.Search(22)).Value);
-        //    Assert.AreEqual(tree.Search(22).Value, tree.Parent(tree.Search(26)).Value);
-        //    Assert.AreEqual(tree.Search(6).Value, tree.Parent(tree.Search(7)).Value);
-        //    Assert.AreEqual(tree.Search(26).Value, tree.Parent(tree.Search(23)).Value);
-        //    Assert.AreEqual(9, tree.Parent(tree.Search(10)).Value);
-        //    Assert.AreEqual(9, tree.Parent(tree.Search(6)).Value);
-        //    Assert.AreEqual(7, tree.Parent(tree.Search(5)).Value);
-        //    Assert.AreEqual(11, tree.Parent(tree.Search(22)).Value);
-        //    Assert.AreEqual(23, tree.Parent(tree.Search(26)).Value);
-        //    Assert.AreEqual(7, tree.Parent(tree.Search(7)).Value);
-        //    Assert.AreEqual(27, tree.Parent(tree.Search(23)).Value);
-        //}
+        [TestMethod]
+        public void ParentInt2()
+        {
+            BinarySearchTree<int> tree = new BinarySearchTree<int>();
+            tree.Add(8, 9);
+            tree.Add(10, 11);
+            tree.Add(6, 7);
+            tree.Add(5, 6);
+            tree.Add(22, 23);
+            tree.Add(26, 27);
+            tree.Add(7, 8);
+            tree.Add(23, 24);
+            Assert.AreEqual(tree.Search(8) , tree.GetNode(10).Parent.Value);
+            Assert.AreEqual(tree.Search(8), tree.GetNode(6).Parent.Value);
+            Assert.AreEqual(tree.Search(6), tree.GetNode(5).Parent.Value);
+            Assert.AreEqual(tree.Search(10), tree.GetNode(22).Parent.Value);
+            Assert.AreEqual(tree.Search(22), tree.GetNode(26).Parent.Value);
+            Assert.AreEqual(tree.Search(6), tree.GetNode(7).Parent.Value);
+            Assert.AreEqual(tree.Search(26), tree.GetNode(23).Parent.Value);
+            Assert.AreEqual(9, tree.GetNode(10).Parent.Value);
+            Assert.AreEqual(9, tree.GetNode(6).Parent.Value);
+            Assert.AreEqual(7, tree.GetNode(5).Parent.Value);
+            Assert.AreEqual(11, tree.GetNode(22).Parent.Value);
+            Assert.AreEqual(23, tree.GetNode(26).Parent.Value);
+            Assert.AreEqual(7, tree.GetNode(7).Parent.Value);
+            Assert.AreEqual(27, tree.GetNode(23).Parent.Value);
+        }
 
-        //[TestMethod]
-        //public void RemoveIntWHeightAndParent()
-        //{
-        //    BinarySearchTree<int> tree = new BinarySearchTree<int>();
-        //    for (int i = 0; i < 50; i++)
-        //    {
-        //        tree.Add(i, i + 1);
-        //    }
-        //    tree.Remove(20);
-        //    Assert.AreEqual(48, tree.Height);
-        //    Assert.AreEqual(20, tree.Parent(tree.Search(21)).Value);
-        //}
+        [TestMethod]
+        public void RemoveIntWHeightAndParent()
+        {
+            BinarySearchTree<int> tree = new BinarySearchTree<int>();
+            for (int i = 0; i < 50; i++)
+            {
+                tree.Add(i, i + 1);
+            }
+            tree.Remove(20);
+            Assert.AreEqual(48, tree.Height);
+            Assert.AreEqual(20, tree.GetNode(21).Parent.Value);
+        }
 
-        //[TestMethod]
-        //public void RemoveIntWHeightAndParent2()
-        //{
-        //    BinarySearchTree<int> tree = new BinarySearchTree<int>();
-        //    for (int i = 0; i < 50; i++)
-        //    {
-        //        tree.Add(i, i + 1);
-        //    }
-        //    tree.Remove(20);
-        //    tree.Remove(4);
-        //    tree.Remove(40);
-        //    Assert.AreEqual(46, tree.Height);
-        //    Assert.AreEqual(20, tree.Parent(tree.Search(21)).Value);
-        //    Assert.AreEqual(4, tree.Parent(tree.Search(5)).Value);
-        //    Assert.AreEqual(40, tree.Parent(tree.Search(41)).Value);
-        //}
+        [TestMethod]
+        public void RemoveIntWHeightAndParent2()
+        {
+            BinarySearchTree<int> tree = new BinarySearchTree<int>();
+            for (int i = 0; i < 50; i++)
+            {
+                tree.Add(i, i + 1);
+            }
+            tree.Remove(20);
+            tree.Remove(4);
+            tree.Remove(40);
+            Assert.AreEqual(46, tree.Height);
+            Assert.AreEqual(20, tree.GetNode(21).Parent.Value);
+            Assert.AreEqual(4, tree.GetNode(5).Parent.Value);
+            Assert.AreEqual(40, tree.GetNode(41).Parent.Value);
+        }
 
-        //[TestMethod]
-        //public void RemoveIntWHeightAndParent3()
-        //{
-        //    BinarySearchTree<int> tree = new BinarySearchTree<int>();
-        //    tree.Add(8, 9);
-        //    tree.Add(10, 11);
-        //    tree.Add(6, 7);
-        //    tree.Add(5, 6);
-        //    tree.Add(22, 23);
-        //    tree.Add(26, 27);
-        //    tree.Add(7, 8);
-        //    tree.Add(23, 24);
-        //    tree.Remove(10);
-        //    Assert.AreEqual(3, tree.Height);
-        //    Assert.AreEqual(9, tree.GetNode(22).Parent.Value);
-        //    Assert.AreEqual(23, tree.GetNode(8).Right.Value);
-        //}
+        [TestMethod]
+        public void RemoveIntWHeightAndParent3()
+        {
+            BinarySearchTree<int> tree = new BinarySearchTree<int>();
+            tree.Add(8, 9);
+            tree.Add(10, 11);
+            tree.Add(6, 7);
+            tree.Add(5, 6);
+            tree.Add(22, 23);
+            tree.Add(26, 27);
+            tree.Add(7, 8);
+            tree.Add(23, 24);
+            tree.Remove(10);
+            Assert.AreEqual(3, tree.Height);
+            Assert.AreEqual(9, tree.GetNode(22).Parent.Value);
+            Assert.AreEqual(23, tree.GetNode(8).Right.Value);
+        }
 
         [TestMethod]
         public void PostOrderKeys()
