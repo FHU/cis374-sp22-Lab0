@@ -1,2 +1,2 @@
 # Lab0
- Binary Search Tree in C#
+ Binary Search Trees in C#
