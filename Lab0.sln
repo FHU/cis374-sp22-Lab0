@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab0", "Lab0\Lab0.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{07C6D960-CA35-4D85-B8B0-056EC59B6ADE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EBF64ADF-3975-49D3-B01E-ECCD74D5C5EE}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		LICENSE = LICENSE
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
