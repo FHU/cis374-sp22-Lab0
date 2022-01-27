@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lab0
 {
-    public interface IBinarySearchTree <T>
+    public interface IBinarySearchTree<T>
     {
         public void Add(int key, T value);
 
@@ -27,7 +27,7 @@ namespace Lab0
 
         public int MinKey { get; }
 
-        public Tuple<int,T> Min { get; }
+        public Tuple<int, T> Min { get; }
 
         public int MaxKey { get; }
 

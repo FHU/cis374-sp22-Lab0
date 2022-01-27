@@ -23,14 +23,72 @@ namespace Lab0
         // TODO
         public int MinKey => throw new NotImplementedException();
 
-        // TODO
-        public Tuple<int, T> Min => throw new NotImplementedException();
+        public Tuple<int, T> Min
+        {
+            get
+            {
+                if (IsEmpty)
+                {
+                    return null;
+                }
+                else
+                {
+                    BinarySearchTreeNode<T> minNode = MinNodeRecursive(Root);
+                    return Tuple.Create(minNode.Key, minNode.Value);
+                }
+            }
+        }
+
+        private BinarySearchTreeNode<T> MinNodeRecursive(BinarySearchTreeNode<T> node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            else if (node.Left == null)
+            {
+                return node;
+            }
+            else
+            {
+                return MinNodeRecursive(node.Left);
+            }
+        }
 
         // TODO
         public int MaxKey => throw new NotImplementedException();
 
-        // TODO
-        public Tuple<int, T> Max => throw new NotImplementedException();
+        public Tuple<int, T> Max
+        {
+            get
+            {
+                if (IsEmpty)
+                {
+                    return null;
+                }
+                else
+                {
+                    BinarySearchTreeNode<T> maxNode = MaxNodeRecursive(Root);
+                    return Tuple.Create(maxNode.Key, maxNode.Value);
+                }
+            }
+        }
+
+        private BinarySearchTreeNode<T> MaxNodeRecursive(BinarySearchTreeNode<T> node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            else if (node.Right == null)
+            {
+                return node;
+            }
+            else
+            {
+                return MaxNodeRecursive(node.Right);
+            }
+        }
 
         // TODO
         public int MedianKey => throw new NotImplementedException();
@@ -38,7 +96,7 @@ namespace Lab0
         // TODO
         public Tuple<int, T> Median => throw new NotImplementedException();
 
-        public void Add(int key, T value) 
+        public void Add(int key, T value)
         {
             var node = new BinarySearchTreeNode<T>(key, value);
 
@@ -59,14 +117,14 @@ namespace Lab0
         {
             // Duplicate found
             // Do not add to BST
-            if(node.Key == parent.Key)
+            if (node.Key == parent.Key)
             {
                 // Correct Count
                 Count--;
                 return;
             }
 
-            if( node.Key < parent.Key)
+            if (node.Key < parent.Key)
             {
                 if (parent.Left == null)
                 {
@@ -80,7 +138,7 @@ namespace Lab0
             }
             else
             {
-                if(parent.Right == null)
+                if (parent.Right == null)
                 {
                     parent.Right = node;
                     node.Parent = parent;
@@ -111,16 +169,16 @@ namespace Lab0
 
         private BinarySearchTreeNode<T> GetNodeRecursive(BinarySearchTreeNode<T> node, int key)
         {
-            if(node == null)
+            if (node == null)
             {
                 return null;
             }
 
-            if( key == node.Key)
+            if (key == node.Key)
             {
                 return node;
             }
-            else if(key < node.Key)
+            else if (key < node.Key)
             {
                 return GetNodeRecursive(node.Left, key);
             }
@@ -130,21 +188,93 @@ namespace Lab0
             }
         }
 
+        public List<int> InOrderKeys
+        {
+            get
+            {
+                List<int> keys = new List<int>();
+
+                InOrderKeysRecursive(Root, keys);
+
+                return keys;
+            }
+        }
+
+        private void InOrderKeysRecursive(BinarySearchTreeNode<T> node, List<int> keys)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            InOrderKeysRecursive(node.Left, keys);
+            keys.Add(node.Key);
+            InOrderKeysRecursive(node.Right, keys);
+        }
 
         // TODO
-        public List<int> InOrderKeys { get;  }
+        public List<int> PreOrderKeys
+        {
+            get
+            {
+                List<int> keys = new List<int>();
+
+                PreOrderKeysRecursive(Root, keys);
+
+                return keys;
+            }
+        }
+
+        private void PreOrderKeysRecursive(BinarySearchTreeNode<T> node, List<int> keys)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            keys.Add(node.Key);
+            PreOrderKeysRecursive(node.Left, keys);
+            PreOrderKeysRecursive(node.Right, keys);
+        }
 
         // TODO
-        public List<int> PreOrderKeys { get;  }
+        public List<int> PostOrderKeys
+        {
+            get
+            {
+                List<int> keys = new List<int>();
 
-        // TODO
-        public List<int> PostOrderKeys { get; }
+                PostOrderKeysRecursive(Root, keys);
 
+                return keys;
+            }
+        }
+
+        private void PostOrderKeysRecursive(BinarySearchTreeNode<T> node, List<int> keys)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            PostOrderKeysRecursive(node.Left, keys);
+            PostOrderKeysRecursive(node.Right, keys);
+            keys.Add(node.Key);
+        }
 
         // TODO
         public BinarySearchTreeNode<T> Next(BinarySearchTreeNode<T> node)
         {
-            throw new NotImplementedException();
+            var next = node.Right;
+
+            // while left child exists, go left
+            while (next != null)
+            {
+                next = next.Left;
+            }
+
+            // return next; can be null
+            return next;
         }
 
         // TODO
@@ -167,7 +297,7 @@ namespace Lab0
 
         public void Update(int key, T value)
         {
-            if(Contains(key))
+            if (Contains(key))
             {
                 // update value
                 var node = GetNode(key);
