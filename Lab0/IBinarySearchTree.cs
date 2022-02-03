@@ -45,7 +45,5 @@ namespace Lab0
 
         public List<BinarySearchTreeNode<T>> RangeSearch(int min, int max);
 
-
-
     }
 }
