@@ -345,39 +345,26 @@ public void Add(int key, T value)
         public BinarySearchTreeNode<T> Next(BinarySearchTreeNode<T> node)
         {
             List<int> ordered = InOrderKeys;
-            if (node == Root)
+            int number = ordered.IndexOf(node.Key);
+            if (number == ordered.Count-1)
             {
-                return node.Right;
+                return null;
             }
-            if (node.Right != null)
-            {
-                return node.Right;
-            }
-            BinarySearchTreeNode<T> parent = node.Parent;
-            if (parent.Key > node.Key)
-            {
-                return parent;
-            }
-            return Next(parent);
+            int key = ordered[number+1];
+            return GetNode(key);
         }
 
         // TODO
         public BinarySearchTreeNode<T> Prev(BinarySearchTreeNode<T> node)
         {
-            if (node == Root)
+            List<int> ordered = InOrderKeys;
+            int number = ordered.IndexOf(node.Key);
+            if (number == 0)
             {
-                return node.Left;
+                return null;
             }
-            if (node.Left != null)
-            {
-                return node.Left;
-            }
-            BinarySearchTreeNode<T> parent = node.Parent;
-            if (parent.Key < node.Key)
-            {
-                return parent;
-            }
-            return Prev(parent);
+            int key = ordered[number - 1];
+            return GetNode(key);
         }
 
         // TODO
@@ -456,11 +443,7 @@ public void Add(int key, T value)
             List<int> order = new List<int>();
             foreach (int key in ordered)
             {
-                if(min < key)
-                {
-                    order.Add(key);
-                }
-                if (max > key)
+                if((min <= key) && (max >= key))
                 {
                     order.Add(key);
                 }
@@ -476,10 +459,6 @@ public void Add(int key, T value)
                     }
                 }
             }
-            if (order.Count == 0)
-            {
-                return null;
-            }
             List<BinarySearchTreeNode<T>> range  = new List<BinarySearchTreeNode<T>>();
             foreach (int key in order)
             {
@@ -488,10 +467,6 @@ public void Add(int key, T value)
                     BinarySearchTreeNode<T> node = GetNode(key);
                     range.Add(node);
                 }
-            }
-            if(range.Count == 0)
-            {
-                return null;
             }
             return range;
         }
