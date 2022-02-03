@@ -62,10 +62,7 @@ namespace Lab0
         public Tuple<int, T> Max => throw new NotImplementedException();
 
         // TODO
-        public int MedianKey => throw new NotImplementedException();
-
-        // TODO
-        public Tuple<int, T> Median => throw new NotImplementedException();
+        public double MedianKey => throw new NotImplementedException();
 
         public void Add(int key, T value) 
         {
@@ -244,7 +241,7 @@ namespace Lab0
             }
         }
 
-        public List<BinarySearchTreeNode<int>> RangeSearch(int min, int max)
+        public List<BinarySearchTreeNode<T>> RangeSearch(int min, int max)
         {
             throw new NotImplementedException();
         }
