@@ -284,7 +284,27 @@ namespace Lab0
         }
 
         // TODO
-        public List<int> PostOrderKeys { get; }
+        public List<int> PostOrderKeys { 
+            get 
+            {
+                List<int> keys = new List<int>();
+                PostOrderKeysRecursive(Root, keys);
+
+                return keys;
+            }
+        }
+        private void PostOrderKeysRecursive(BinarySearchTreeNode<T> node, List<int> keys)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            PostOrderKeysRecursive(node.Left, keys);
+            PostOrderKeysRecursive(node.Right, keys);
+            keys.Add(node.Key);
+            
+        }
 
 
         // TODO
@@ -365,7 +385,10 @@ namespace Lab0
             BinarySearchTreeNode<T> node = GetNode(min);
             List<BinarySearchTreeNode<T>> rangeList = new();
             while (!node.Key.Equals(null))
+            {
                 rangeList.Add(node);
+                node = Next(node);
+            }
             return rangeList;
         }
     }
