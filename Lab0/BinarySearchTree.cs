@@ -382,8 +382,8 @@ namespace Lab0
                 return;
             }
 
-            PreOrderKeysRecursive(node.Left, keys);
-            PreOrderKeysRecursive(node.Right, keys);
+            PostOrderKeysRecursive(node.Left, keys);
+            PostOrderKeysRecursive(node.Right, keys);
             keys.Add(node.Key);
         }
 
@@ -395,6 +395,11 @@ namespace Lab0
             }
 
             List<int> keys = InOrderKeys;
+
+            if (keys.IndexOf(node.Key) + 1 > keys.Count - 1)
+            {
+                return null;
+            }
 
             int NextKey = keys[keys.IndexOf(node.Key) + 1];
 
@@ -411,6 +416,11 @@ namespace Lab0
             }
 
             List<int> keys = InOrderKeys;
+
+            if (keys.IndexOf(node.Key) - 1 < 0)
+            {
+                return null;
+            }
 
             int PrevKey = keys[keys.IndexOf(node.Key) - 1];
 
@@ -452,10 +462,12 @@ namespace Lab0
                         else if (parent.Left == current)
                         {
                             parent.Left = current.Left;
+                            parent.Left.Parent = parent;
                         }
                         else
                         {
                             parent.Right = current.Left;
+                            parent.Right.Parent = parent;
                         }
                     }
                     else if (current.Left == null)
@@ -467,10 +479,12 @@ namespace Lab0
                         else if (parent.Left == current)
                         {
                             parent.Left = current.Right;
+                            parent.Left.Parent = parent;
                         }
                         else
                         {
                             parent.Right = current.Right;
+                            parent.Right.Parent = parent;
                         }
                     }
                     else
@@ -523,6 +537,11 @@ namespace Lab0
 
         public List<BinarySearchTreeNode<T>> RangeSearch(int min, int max)
         {
+            if (min < InOrderKeys[0] || max > InOrderKeys[InOrderKeys.Count - 1])
+            {
+                return null;
+            }
+
             List<BinarySearchTreeNode<T>> Nodes = new List<BinarySearchTreeNode<T>>();
 
             for (int i = min; i <= max; i++)
