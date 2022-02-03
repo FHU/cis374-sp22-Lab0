@@ -33,15 +33,17 @@ namespace Lab0
 
         public Tuple<int, T> Max { get; }
 
-        public int MedianKey { get; }
+        public double MedianKey { get; }
 
-        public Tuple<int, T> Median { get; }
+        // This needs to return List<Tuple<int,T>> since there could be 2 items
+        // Let's remove it for this lab.
+        //public Tuple<int, T> Median { get; }
 
         public BinarySearchTreeNode<T> Next(BinarySearchTreeNode<T> node);
 
         public BinarySearchTreeNode<T> Prev(BinarySearchTreeNode<T> node);
 
-        public List<BinarySearchTreeNode<int>> RangeSearch(int min, int max);
+        public List<BinarySearchTreeNode<T>> RangeSearch(int min, int max);
 
 
 
