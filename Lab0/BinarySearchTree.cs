@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Lab0
@@ -24,7 +24,36 @@ namespace Lab0
         public int MinKey => throw new NotImplementedException();
 
         // TODO
-        public Tuple<int, T> Min => throw new NotImplementedException();
+        public Tuple<int, T> Min
+        {
+            get
+            {
+                if(IsEmpty)
+                {
+                    return null;
+                }
+                else
+                {
+                    BinarySearchTreeNode<T> minNode = MinNodeRecursive(Root);
+                    return Tuple.Create(minNode.Key, minNode.Value);
+                }
+            }
+        }
+
+        private BinarySearchTreeNode<T> MinNodeRecursive(BinarySearchTreeNode<T> node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            else if (node.Left == null)
+            {
+                return node;
+            }
+            else {
+                return MinNodeRecursive(node.Left);
+            }
+        }
 
         // TODO
         public int MaxKey => throw new NotImplementedException();
@@ -33,10 +62,7 @@ namespace Lab0
         public Tuple<int, T> Max => throw new NotImplementedException();
 
         // TODO
-        public int MedianKey => throw new NotImplementedException();
-
-        // TODO
-        public Tuple<int, T> Median => throw new NotImplementedException();
+        public double MedianKey => throw new NotImplementedException();
 
         public void Add(int key, T value) 
         {
@@ -132,10 +158,50 @@ namespace Lab0
 
 
         // TODO
-        public List<int> InOrderKeys { get;  }
+        public List<int> InOrderKeys {
+            get
+            {
+                List<int> keys = new List<int>();
+                InOrderKeysRecursive(Root, keys);
+
+                return keys;
+
+            }
+        }
+
+        private void InOrderKeysRecursive(BinarySearchTreeNode<T> node, List<int> keys)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            InOrderKeysRecursive(node.Left, keys);
+            keys.Add(node.Key);
+            InOrderKeysRecursive(node.Right, keys);
+        }
 
         // TODO
-        public List<int> PreOrderKeys { get;  }
+        public List<int> PreOrderKeys { get
+            {
+                List<int> keys = new List<int>();
+                PreOrderKeysRecursive(Root, keys);
+
+                return keys;
+            }
+        }
+
+        private void PreOrderKeysRecursive(BinarySearchTreeNode<T> node, List<int> keys)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            keys.Add(node.Key);
+            PreOrderKeysRecursive(node.Left, keys);
+            PreOrderKeysRecursive(node.Right, keys);
+        }
 
         // TODO
         public List<int> PostOrderKeys { get; }
@@ -175,7 +241,7 @@ namespace Lab0
             }
         }
 
-        public List<BinarySearchTreeNode<int>> RangeSearch(int min, int max)
+        public List<BinarySearchTreeNode<T>> RangeSearch(int min, int max)
         {
             throw new NotImplementedException();
         }
