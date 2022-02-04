@@ -331,45 +331,68 @@ namespace Lab0
         // TODO
         public void Remove(int key)
         {
-            BinarySearchTreeNode<T> node = GetNode(key);
-            if (node.Left == null)
+            BinarySearchTreeNode<T> node = Root;
+            BinarySearchTreeNode<T> parent = node.Parent;
+            while (!node.Equals(null))
             {
-                if (node.Right == null)
+                if (node.Key == key)
                 {
-                    if (node.Parent.Equals(null))
-                        Root = null;
-                    else if (node.Parent.Left == node)
-                        node.Parent.Left = null;
+                    if (node.Left == null)
+                    {
+                        if (node.Right == null)
+                        {
+                            if (parent.Equals(null))
+                                Root = null;
+                            else if (parent.Left == node)
+                                parent.Left = null;
+                            else
+                                parent.Right = null;
+                        }
+                        else
+                        {
+                            if (parent.Equals(null))
+                                Root = node.Right;
+                            else if (parent.Left == node)
+                                parent.Left = node.Right;
+                            else
+                                parent.Right = node.Right;
+                        }
+                    }
                     else
-                        node.Parent.Right = null;
+                    {
+                        if (node.Right == null)
+                        {
+                            if (parent.Equals(null))
+                                Root = node.Left;
+                            else if (parent.Left == node)
+                                parent.Left = node.Left;
+                            else
+                                parent.Right = node.Right;
+                        }
+                        else
+                        {
+                            BinarySearchTreeNode<T> suc = node.Right;
+                            while (!suc.Left.Equals(null))
+                                suc = suc.Left;
+                            T sucData = suc.Value;
+                            Remove(suc.Key);
+                            node = new BinarySearchTreeNode<T>(node.Key, sucData);
+                        }
+                    }
+                    break;
+                }
+                else if (node.Key < key)
+                {
+                    parent = node;
+                    node = node.Right;
                 }
                 else
                 {
-                    if (node.Parent.Equals(null))
-                        Root = node.Right;
-                    else if (node.Parent.Left == node)
-                        node.Parent.Left = node.Right;
-                    else
-                        node.Parent.Right = node.Right;
+                    parent = node;
+                    node = node.Left;
                 }
             }
-            else
-            {
-                if (node.Right == null)
-                {
-                    if (node.Parent.Equals(null))
-                        Root = node.Left;
-                    else if (node.Parent.Left == node)
-                        node.Parent.Left = node.Left;
-                    else
-                        node.Parent.Right = node.Right;
-                }
-                else
-                {
-                    BinarySearchTreeNode<T> suc = Prev(node);
-                    Remove(suc.Key);
-                }
-            }
+            
 
         }
 
