@@ -22,8 +22,17 @@ namespace Lab0
         {
             get
             {
-                return 0;
+                return GetHeight(Root);
             }
+        }
+
+        private int GetHeight(BinarySearchTreeNode<T> hnode)
+        {
+            if (hnode == null)
+                return -1;
+            int leftHeight = GetHeight(hnode.Left);
+            int rightHeight = GetHeight(hnode.Right);
+            return 1 + Math.Max(leftHeight, rightHeight);
         }
 
         // TODO
@@ -382,13 +391,17 @@ namespace Lab0
 
         public List<BinarySearchTreeNode<T>> RangeSearch(int min, int max)
         {
-            BinarySearchTreeNode<T> node = GetNode(min);
             List<BinarySearchTreeNode<T>> rangeList = new();
-            while (!node.Key.Equals(null))
+
+            List<int> all = new();
+            for (int i = min; i < (max + 1); i++)
+                all.Add(i);
+            foreach(int key in InOrderKeys)
             {
-                rangeList.Add(node);
-                node = Next(node);
+                if (all.Contains(key))
+                    rangeList.Add(GetNode(key));
             }
+
             return rangeList;
         }
     }

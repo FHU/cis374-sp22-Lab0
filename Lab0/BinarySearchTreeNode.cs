@@ -18,6 +18,10 @@
             Left = Right = Parent = null;
         }
 
+        public BinarySearchTreeNode()
+        {
+        }
+
         public override string ToString()
         {
             return $"<{Key}: {Value}>";
