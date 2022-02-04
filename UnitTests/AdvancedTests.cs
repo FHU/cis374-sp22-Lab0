@@ -57,7 +57,7 @@ namespace UnitTestProject1
                 tree.Add(index, index);
             }
 
-            BinarySearchTreeNode<int> current = new BinarySearchTreeNode<int>(1,1);
+            BinarySearchTreeNode<int> current = new BinarySearchTreeNode<int>(1, 1);
             for (int i = 0; i < 49; i++)
             {
                 current = tree.GetNode(i);
@@ -280,11 +280,11 @@ namespace UnitTestProject1
             int index = 0;
             for (int i = 0; i < 50; i++)
             {
-                index = (i + 13) % 50;
+                index = (i + 50);
                 tree.Add(index, index);
             }
             List<BinarySearchTreeNode<int>> range = tree.RangeSearch(min, max);
-            Assert.IsNull(range);
+            Assert.AreEqual(0, range.Count);
         }
     }
 }
