@@ -273,8 +273,14 @@ namespace Lab0
         // TODO
         public BinarySearchTreeNode<T> Next(BinarySearchTreeNode<T> node)
         {
-            int key = Math.Min(node.Parent.Key, node.Right.Key);
-            return GetNode(key);
+            int num = node.Key;
+            while(GetNode(num) == null)
+            {
+                num++;
+
+            }
+
+            return GetNode(num);
             
 
 
@@ -283,7 +289,13 @@ namespace Lab0
         // TODO
         public BinarySearchTreeNode<T> Prev(BinarySearchTreeNode<T> node)
         {
-            int num = Math.Max(node.Left.Key, node.Parent.Key);
+            int num = node.Key;
+            while (GetNode(num) == null)
+            {
+                num--;
+
+            }
+
             return GetNode(num);
         }
 
