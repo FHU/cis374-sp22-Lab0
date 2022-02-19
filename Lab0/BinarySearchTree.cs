@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace Lab0
 {
     public class BinarySearchTree<T> : IBinarySearchTree<T>
@@ -25,7 +26,7 @@ namespace Lab0
 
         public int BSTGetHeight(BinarySearchTreeNode<T> node)
         {
-            if (IsEmpty)
+            if (Root == null)
             {
                 return 0;
 
@@ -33,7 +34,7 @@ namespace Lab0
             int leftHeight = BSTGetHeight(node.Left);
             int rightHeight = BSTGetHeight(node.Right);
 
-            return 1 + Math.Max(leftHeight, rightHeight);
+            return Math.Max(leftHeight, rightHeight) + 1;
 
         }
 
@@ -92,7 +93,25 @@ namespace Lab0
         public Tuple<int, T> Max => throw new NotImplementedException();
 
         // TODO
-        public double MedianKey => throw new NotImplementedException();
+        public double MedianKey => GetMedianKey();
+
+        public double GetMedianKey()
+        {
+            double num = Count / 2;
+            
+            if (Math.Floor(num) == num)
+            {
+                return InOrderKeys[(int)num];
+            }
+            else
+            {
+                double low = InOrderKeys[(int)num];
+                double high = InOrderKeys[Math.Ceiling((int)num)];
+
+            }
+
+
+        }
 
         public void Add(int key, T value)
         {
